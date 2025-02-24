@@ -1,10 +1,8 @@
-export const RoundCircle = ({ className }) => {
+export const RoundCircle = ({ size }) => {
   return (
     <div
-      className={
-        `border-[3px] border-red-500 opacity-[0.1] rounded-full absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 ` +
-        className
-      }
+      className="border border-t-black border-l-black opacity-10 border-r-white -rotate-45 rounded-full absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+      style={{ width: size, height: size }}
     ></div>
   );
 };

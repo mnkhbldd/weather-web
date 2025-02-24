@@ -1,13 +1,14 @@
 import { RoundCircle } from "@/components";
-import Image from "next/image";
 
 export default function Home() {
+  const circleData = ["340px", "540px", "940px", "1340px"];
+
   return (
-    <div className="w-screen h-screen flex relative ">
+    <div className="w-screen h-screen flex relative">
       <div className="w-1/2 h-full bg-[#F3F4F6]"></div>
       <div className="w-1/2 h-full bg-[#0F141E]"></div>
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-        <div className="w-[140px] h-[140px] bg-white rounded-full flex items-center justify-center gap-[15.71px] absolute  top-1/2 left-[45%] transform -translate-x-[45%] -translate-y-1/2">
+        <div className="w-[140px] h-[140px] bg-[#F3F4F6] rounded-full flex items-center justify-center gap-[15.71px] absolute top-1/2 left-[45%] transform -translate-x-[45%] -translate-y-1/2">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="43"
@@ -33,12 +34,11 @@ export default function Home() {
             />
           </svg>
         </div>
-        {/* <RoundCircle className="!size-[140px] "></RoundCircle> */}
-        <RoundCircle className="!size-[340px] "></RoundCircle>
-        <RoundCircle className="!size-[540px]  "></RoundCircle>
-        <RoundCircle className="!size-[940px] "></RoundCircle>
-        <RoundCircle className="!size-[1340px]"></RoundCircle>
       </div>
+
+      {circleData.map((value, index) => (
+        <RoundCircle key={index} size={value} />
+      ))}
     </div>
   );
 }
