@@ -5,6 +5,23 @@ import { useState } from "react";
 export default function Home() {
   const circleData = ["340px", "540px", "940px", "1340px"];
 
+  const mockData = [
+    {
+      city: "Mongolia",
+      dayTemp: "-21",
+      nightTemp: "-41",
+      dayStatus: "Bright",
+      nightStatus: "Clear",
+    },
+    {
+      city: "China",
+      dayTemp: "21",
+      nightTemp: "41",
+      dayStatus: "Cloudy",
+      nightStatus: "Rainy",
+    },
+  ];
+
   const [inputData, setInputData] = useState("");
 
   const handleOnChange = (event) => {
