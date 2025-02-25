@@ -20,14 +20,26 @@ export default function Home() {
       dayStatus: "Cloudy",
       nightStatus: "Rainy",
     },
+    {
+      city: "Korea",
+      dayTemp: "31",
+      nightTemp: "51",
+      dayStatus: "Rainy",
+      nightStatus: "Clear",
+    },
   ];
 
-  const [inputData, setInputData] = useState("");
+  const [inputData, setInputData] = useState("Mongolia");
 
   const handleOnChange = (event) => {
     setInputData(event.target.value);
-    console.log(event.target.value);
   };
+
+  const cityData =
+    mockData.find(
+      (data) => data.city.toLowerCase() === inputData.toLowerCase()
+    ) || mockData[0];
+
   return (
     <div className="w-screen h-screen flex relative">
       <div className="w-1/2 h-full bg-[#F3F4F6] flex justify-center items-center overflow-hidden">
@@ -36,20 +48,24 @@ export default function Home() {
           className="absolute z-50 top-10 left-10 shadow-lg max-w-full"
           placeholder="Enter city name"
         />
+
         <WeatherCard
-          city="Mongolia"
-          dayTemp="-21"
-          dayStatus="Bright"
+          city={cityData.city}
+          dayTemp={cityData.dayTemp}
+          dayStatus={cityData.dayStatus}
           isDaytime={true}
+          inputData={inputData}
         />
       </div>
       <div className="w-1/2 h-full bg-[#0F141E] flex justify-center items-center overflow-hidden">
         <WeatherCard
-          city="Mongolia"
-          dayTemp="-21"
-          dayStatus="Clear"
+          city={cityData.city}
+          dayTemp={cityData.nightTemp}
+          dayStatus={cityData.nightStatus}
           isDaytime={false}
+          inputData={inputData}
         />
+
         <div className="absolute bottom-0 right-[220px]">
           <svg
             xmlns="http://www.w3.org/2000/svg"
