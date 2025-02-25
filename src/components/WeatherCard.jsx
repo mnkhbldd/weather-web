@@ -1,7 +1,7 @@
 import React from "react";
 import { MdOutlineLocationOn } from "react-icons/md";
 
-export const WeatherCard = ({ isDaytime }) => {
+export const WeatherCard = ({ isDaytime, city, dayTemp, dayStatus }) => {
   return (
     <div
       className={`w-[414px] h-[832px] rounded-[48px] z-40 backdrop-blur-md bg-opacity-50 flex items-center pt-2 flex-col  ${
@@ -17,7 +17,7 @@ export const WeatherCard = ({ isDaytime }) => {
           <div className="flex flex-col  w-full">
             <p
               className={` text-[18px] font-medium ${
-                isDaytime ? "text-black" : "text-[#9CA3AF]"
+                isDaytime ? "text-[#111827]" : "text-[#9CA3AF]"
               }`}
             >
               September 10, 2021
@@ -27,7 +27,7 @@ export const WeatherCard = ({ isDaytime }) => {
                 isDaytime ? "text-[#111827]" : "text-white "
               }`}
             >
-              Krakow
+              {city}
             </p>
           </div>
           <MdOutlineLocationOn
@@ -66,14 +66,14 @@ export const WeatherCard = ({ isDaytime }) => {
               : " bg-gradient-to-b from-gray-300 to-gray-600"
           }`}
         >
-          26°
+          {dayTemp}°
         </h1>
         <p
           className={`text-[24px] font-bold   ${
             isDaytime ? "text-[#FF8E27]" : "text-[#777CCE]"
           }`}
         >
-          Clear
+          {dayStatus}
         </p>
       </div>
       <div className="w-full">

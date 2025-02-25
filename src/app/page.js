@@ -2,15 +2,63 @@ import { CustomInput, WeatherCard, RoundCircle } from "@/components";
 
 export default function Home() {
   const circleData = ["340px", "540px", "940px", "1340px"];
+  const mockData = [
+    { id: 1, city: "Mongolia", dayTemp: "-7", dayStatus: "Bright" },
+  ];
 
   return (
     <div className="w-screen h-screen flex relative">
       <div className="w-1/2 h-full bg-[#F3F4F6] flex justify-center items-center overflow-hidden">
-        <CustomInput className="absolute z-50 top-10 left-10 shadow-lg max-w-full"></CustomInput>
-        <WeatherCard isDaytime={true} />
+        <CustomInput
+          className="absolute z-50 top-10 left-10 shadow-lg max-w-full"
+          placeholder="Enter city name"
+        />
+        <WeatherCard
+          city="Mongolia"
+          dayTemp="-21"
+          dayStatus="Bright"
+          isDaytime={true}
+        />
       </div>
       <div className="w-1/2 h-full bg-[#0F141E] flex justify-center items-center overflow-hidden">
-        <WeatherCard />
+        <WeatherCard
+          city="Mongolia"
+          dayTemp="-21"
+          dayStatus="Clear"
+          isDaytime={false}
+        />
+        <div className="absolute bottom-0 right-[220px]">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="128"
+            height="128"
+            viewBox="0 0 128 128"
+            fill="none"
+          >
+            <circle cx="64" cy="64" r="64" fill="#6E72C9" />
+            <circle
+              cx="64"
+              cy="64"
+              r="64"
+              fill="url(#paint0_radial_1_145)"
+              fillOpacity="0.35"
+              style={{ mixBlendMode: "overlay" }}
+            />
+            <defs>
+              <radialGradient
+                id="paint0_radial_1_145"
+                cx="0"
+                cy="0"
+                r="1"
+                gradientUnits="userSpaceOnUse"
+                gradientTransform="translate(64 64) rotate(90) scale(64)"
+              >
+                <stop stopColor="white" />
+                <stop offset="1" stopColor="white" stopOpacity="0" />
+              </radialGradient>
+            </defs>
+          </svg>
+        </div>
       </div>
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
         <div className="w-[140px] h-[140px] bg-[#F3F4F6] rounded-full flex items-center justify-center gap-[15.71px] absolute top-1/2 left-[45%] transform -translate-x-[45%] -translate-y-1/2">
