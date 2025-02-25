@@ -1,15 +1,21 @@
+"use client";
 import { CustomInput, WeatherCard, RoundCircle } from "@/components";
+import { useState } from "react";
 
 export default function Home() {
   const circleData = ["340px", "540px", "940px", "1340px"];
-  const mockData = [
-    { id: 1, city: "Mongolia", dayTemp: "-7", dayStatus: "Bright" },
-  ];
 
+  const [inputData, setInputData] = useState("");
+
+  const handleOnChange = (event) => {
+    setInputData(event.target.value);
+    console.log(event.target.value);
+  };
   return (
     <div className="w-screen h-screen flex relative">
       <div className="w-1/2 h-full bg-[#F3F4F6] flex justify-center items-center overflow-hidden">
         <CustomInput
+          handleOnChange={handleOnChange}
           className="absolute z-50 top-10 left-10 shadow-lg max-w-full"
           placeholder="Enter city name"
         />

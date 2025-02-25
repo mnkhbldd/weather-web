@@ -1,4 +1,4 @@
-export const CustomInput = ({ className }) => {
+export const CustomInput = ({ className, handleOnChange }) => {
   return (
     <div
       className={
@@ -20,6 +20,7 @@ export const CustomInput = ({ className }) => {
         </g>
       </svg>
       <input
+        onChange={handleOnChange}
         type="text"
         placeholder="Search"
         className="w-[455px] h-[44px] text-black text-[32px] font-bold outline-none"
