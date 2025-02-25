@@ -3,9 +3,13 @@ import { RoundCircle, WeatherCard } from "@/components";
 export default function Home() {
   const circleData = ["340px", "540px", "940px", "1340px"];
 
+  const mockData = [{ city: "Mongolia", dayTemp: "-7", nightTemp: "-21" }];
+
   return (
     <div className="w-screen h-screen flex relative">
-      <div className="w-1/2 h-full bg-[#F3F4F6]"></div>
+      <div className="w-1/2 h-full bg-[#F3F4F6] flex justify-center items-center">
+        <WeatherCard isDaytime={true} />
+      </div>
       <div className="w-1/2 h-full bg-[#0F141E] flex justify-center items-center">
         <WeatherCard />
       </div>
