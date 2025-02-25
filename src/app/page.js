@@ -7,10 +7,10 @@ export default function Home() {
 
   return (
     <div className="w-screen h-screen flex relative">
-      <div className="w-1/2 h-full bg-[#F3F4F6] flex justify-center items-center">
+      <div className="w-1/2 h-full bg-[#F3F4F6] flex justify-center items-center overflow-hidden">
         <WeatherCard isDaytime={true} />
       </div>
-      <div className="w-1/2 h-full bg-[#0F141E] flex justify-center items-center">
+      <div className="w-1/2 h-full bg-[#0F141E] flex justify-center items-center overflow-hidden">
         <WeatherCard />
       </div>
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
@@ -42,9 +42,11 @@ export default function Home() {
         </div>
       </div>
 
-      {circleData.map((value, index) => (
-        <RoundCircle key={index} size={value} />
-      ))}
+      <div className="w-full h-full absolute overflow-hidden">
+        {circleData.map((value, index) => (
+          <RoundCircle key={index} size={value} className="" />
+        ))}
+      </div>
     </div>
   );
 }
