@@ -1,5 +1,10 @@
 "use client";
-import { CustomInput, WeatherCard, RoundCircle } from "@/components";
+import {
+  CustomInput,
+  WeatherCard,
+  RoundCircle,
+  DropDownMenu,
+} from "@/components";
 import { useState } from "react";
 
 export default function Home() {
@@ -21,7 +26,7 @@ export default function Home() {
       nightStatus: "Rainy",
     },
     {
-      city: "Korea",
+      city: "Corea",
       dayTemp: "31",
       nightTemp: "51",
       dayStatus: "Rainy",
@@ -35,10 +40,11 @@ export default function Home() {
     setInputData(event.target.value);
   };
 
-  const cityData =
-    mockData.find(
-      (data) => data.city.toLowerCase() === inputData.toLowerCase()
-    ) || mockData[0];
+  const cityData = mockData.find((data) =>
+    data.city.toLowerCase().includes(inputData.toLowerCase())
+  );
+
+  console.log(cityData);
 
   return (
     <div className="w-screen h-screen flex relative">
@@ -47,6 +53,12 @@ export default function Home() {
           handleOnChange={handleOnChange}
           className="absolute z-50 top-10 left-10 shadow-lg max-w-full"
           placeholder="Enter city name"
+        />
+        <DropDownMenu
+          className={`top-[150px] left-10 shadow-lg ${
+            cityData.city ? "flex" : "hidden"
+          }`}
+          cityName={cityData.city}
         />
 
         <WeatherCard
@@ -66,7 +78,7 @@ export default function Home() {
           inputData={inputData}
         />
 
-        <div className="absolute bottom-0 right-[220px]">
+        <div className="absolute bottom-[170px] right-[370px]">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="128"
@@ -127,7 +139,6 @@ export default function Home() {
           </svg>
         </div>
       </div>
-
       <div className="w-full h-full absolute overflow-hidden">
         {circleData.map((value, index) => (
           <RoundCircle key={index} size={value} className="" />
