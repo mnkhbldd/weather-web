@@ -48,18 +48,16 @@ export default function Home() {
     },
   ];
 
-  const [inputData, setInputData] = useState("Mongolia");
+  const [inputData, setInputData] = useState("");
 
   const handleOnChange = (event) => {
-    setInputData(event.target.value);
+    setInputData(event.target.value.trim());
   };
 
   const cityData =
     mockData.find((data) =>
-      data.city.toLowerCase().includes(inputData.toLowerCase())
+      data.city.toLowerCase().trim().includes(inputData.toLowerCase().trim())
     ) || mockData[0];
-
-  console.log(cityData);
 
   return (
     <div className="w-screen h-screen flex relative">
@@ -76,8 +74,8 @@ export default function Home() {
               .filter((data) =>
                 data.city.toLowerCase().includes(inputData.toLowerCase())
               )
-              .map((data) => (
-                <div className="w-fit h-fit">
+              .map((data, index) => (
+                <div key={index} className="w-fit h-fit">
                   <DropDownMenu cityName={data.city} />
                 </div>
               ))}
