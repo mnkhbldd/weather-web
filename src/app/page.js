@@ -19,6 +19,13 @@ export default function Home() {
       nightStatus: "Clear",
     },
     {
+      city: "Moldova",
+      dayTemp: "-21",
+      nightTemp: "-41",
+      dayStatus: "Bright",
+      nightStatus: "Clear",
+    },
+    {
       city: "China",
       dayTemp: "21",
       nightTemp: "41",
@@ -26,7 +33,14 @@ export default function Home() {
       nightStatus: "Rainy",
     },
     {
-      city: "Corea",
+      city: "Chicago",
+      dayTemp: "21",
+      nightTemp: "41",
+      dayStatus: "Cloudy",
+      nightStatus: "Rainy",
+    },
+    {
+      city: "Korea",
       dayTemp: "31",
       nightTemp: "51",
       dayStatus: "Rainy",
@@ -40,27 +54,35 @@ export default function Home() {
     setInputData(event.target.value);
   };
 
-  const cityData = mockData.find((data) =>
-    data.city.toLowerCase().includes(inputData.toLowerCase())
-  );
+  const cityData =
+    mockData.find((data) =>
+      data.city.toLowerCase().includes(inputData.toLowerCase())
+    ) || mockData[0];
 
   console.log(cityData);
 
   return (
     <div className="w-screen h-screen flex relative">
-      <div className="w-1/2 h-full bg-[#F3F4F6] flex justify-center items-center overflow-hidden">
+      <div className="w-1/2 h-full bg-[#F3F4F6] flex flex-col justify-center items-center overflow-hidden">
         <CustomInput
           handleOnChange={handleOnChange}
           className="absolute z-50 top-10 left-10 shadow-lg max-w-full"
           placeholder="Enter city name"
         />
-        <DropDownMenu
-          className={`top-[150px] left-10 shadow-lg ${
-            cityData.city ? "flex" : "hidden"
-          }`}
-          cityName={cityData.city}
-        />
 
+        {inputData && (
+          <div className="flex-col items-start absolute top-[150px] left-10 z-50 bg-white px-6 py-4 rounded-3xl shadow-lg">
+            {mockData
+              .filter((data) =>
+                data.city.toLowerCase().includes(inputData.toLowerCase())
+              )
+              .map((data) => (
+                <div className="w-fit h-fit">
+                  <DropDownMenu cityName={data.city} />
+                </div>
+              ))}
+          </div>
+        )}
         <WeatherCard
           city={cityData.city}
           dayTemp={cityData.dayTemp}
