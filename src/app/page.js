@@ -48,6 +48,10 @@ export default function Home() {
     },
   ];
 
+  const data = fetch(
+    "https://api.weatherapi.com/v1/forecast.json?key=c54db69bc7dc4466bf415506241712&q=London"
+  ).then((response) => console.log(response, "response"));
+
   const [inputData, setInputData] = useState("");
 
   const handleOnChange = (event) => {

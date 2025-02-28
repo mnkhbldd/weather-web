@@ -2,6 +2,9 @@ import React from "react";
 import { MdOutlineLocationOn } from "react-icons/md";
 
 export const WeatherCard = ({ isDaytime, city, dayTemp, dayStatus }) => {
+  const today = new Date();
+  const options = { month: "long", day: "numeric", year: "numeric" };
+  const formattedDate = today.toLocaleDateString("en-US", options);
   return (
     <div
       className={`w-[414px] h-[832px] rounded-[48px] z-40 backdrop-blur-md bg-opacity-50 flex items-center pt-2 flex-col  ${
@@ -20,7 +23,7 @@ export const WeatherCard = ({ isDaytime, city, dayTemp, dayStatus }) => {
                 isDaytime ? "text-[#111827]" : "text-[#9CA3AF]"
               }`}
             >
-              September 10, 2021
+              {formattedDate}
             </p>
             <p
               className={`text-[48px] font-extrabold ${
