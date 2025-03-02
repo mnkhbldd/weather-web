@@ -5,63 +5,34 @@ import {
   RoundCircle,
   DropDownMenu,
 } from "@/components";
+import axios from "axios";
 import { useState } from "react";
+import { useEffect } from "react";
 
 export default function Home() {
   const circleData = ["340px", "540px", "940px", "1340px"];
 
-  const mockData = [
-    {
-      city: "Mongolia",
-      dayTemp: "-21",
-      nightTemp: "-41",
-      dayStatus: "Bright",
-      nightStatus: "Clear",
-    },
-    {
-      city: "Moldova",
-      dayTemp: "-21",
-      nightTemp: "-41",
-      dayStatus: "Bright",
-      nightStatus: "Clear",
-    },
-    {
-      city: "China",
-      dayTemp: "21",
-      nightTemp: "41",
-      dayStatus: "Cloudy",
-      nightStatus: "Rainy",
-    },
-    {
-      city: "Chicago",
-      dayTemp: "21",
-      nightTemp: "41",
-      dayStatus: "Cloudy",
-      nightStatus: "Rainy",
-    },
-    {
-      city: "Korea",
-      dayTemp: "31",
-      nightTemp: "51",
-      dayStatus: "Rainy",
-      nightStatus: "Clear",
-    },
-  ];
-
-  const data = fetch(
-    "https://api.weatherapi.com/v1/forecast.json?key=c54db69bc7dc4466bf415506241712&q=London"
-  ).then((response) => console.log(response, "response"));
-
+  const [weatherData, setWeatherData] = useState(null);
   const [inputData, setInputData] = useState("");
+
+  useEffect(() => {
+    axios
+      .get(
+        `https://api.weatherapi.com/v1/forecast.json?key=c54db69bc7dc4466bf415506241712&q=${inputData}`
+      )
+      .then((res) => setWeatherData(res.data));
+  }, [inputData]);
+
+  console.log(weatherData?.forecast?.forecastday[0].day?.maxtemp_c);
 
   const handleOnChange = (event) => {
     setInputData(event.target.value.trim());
   };
 
-  const cityData =
-    mockData.find((data) =>
-      data.city.toLowerCase().trim().includes(inputData.toLowerCase().trim())
-    ) || mockData[0];
+  // const cityData =
+  //   mockData.find((data) =>
+  //     data.city.toLowerCase().trim().includes(inputData.toLowerCase().trim())
+  //   ) || mockData[0];
 
   return (
     <div className="w-screen h-screen flex relative">
@@ -72,7 +43,7 @@ export default function Home() {
           placeholder="Enter city name"
         />
 
-        {inputData && (
+        {/* {inputData && (
           <div className="flex-col items-start absolute top-[150px] left-10 z-50 bg-white px-6 py-4 rounded-3xl shadow-lg">
             {mockData
               .filter((data) =>
@@ -84,20 +55,20 @@ export default function Home() {
                 </div>
               ))}
           </div>
-        )}
+        )} */}
         <WeatherCard
-          city={cityData.city}
-          dayTemp={cityData.dayTemp}
-          dayStatus={cityData.dayStatus}
+          city={weatherData?.location?.name}
+          dayTemp={weatherData?.forecast?.forecastday[0].day?.maxtemp_c}
+          dayStatus={weatherData?.forecast?.forecastday[0].day?.condition?.text}
           isDaytime={true}
           inputData={inputData}
         />
       </div>
       <div className="w-1/2 h-full bg-[#0F141E] flex justify-center items-center overflow-hidden">
         <WeatherCard
-          city={cityData.city}
-          dayTemp={cityData.nightTemp}
-          dayStatus={cityData.nightStatus}
+          city={weatherData?.location?.name}
+          dayTemp={weatherData?.forecast?.forecastday[0].day?.mintemp_c}
+          dayStatus={weatherData?.forecast?.forecastday[0].day?.condition?.text}
           isDaytime={false}
           inputData={inputData}
         />
