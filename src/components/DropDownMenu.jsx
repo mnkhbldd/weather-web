@@ -1,6 +1,9 @@
-export const DropDownMenu = ({ className, cityName }) => {
+export const DropDownMenu = ({ className, cityName, onClick }) => {
   return (
-    <div className="w-[519px] h-[56px] flex gap-4 items-center">
+    <div
+      onClick={onClick}
+      className="w-[519px] h-[56px] flex gap-4 items-center"
+    >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="40"

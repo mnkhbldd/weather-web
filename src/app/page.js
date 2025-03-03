@@ -13,7 +13,7 @@ export default function Home() {
   const circleData = ["340px", "540px", "940px", "1340px"];
 
   const [weatherData, setWeatherData] = useState(null);
-  const [inputData, setInputData] = useState("");
+  const [inputData, setInputData] = useState("Ulaanbaatar");
 
   useEffect(() => {
     axios
@@ -23,16 +23,13 @@ export default function Home() {
       .then((res) => setWeatherData(res.data));
   }, [inputData]);
 
-  console.log(weatherData?.forecast?.forecastday[0].day?.maxtemp_c);
-
   const handleOnChange = (event) => {
-    setInputData(event.target.value.trim());
+    setInputData(event.target.value);
   };
 
-  // const cityData =
-  //   mockData.find((data) =>
-  //     data.city.toLowerCase().trim().includes(inputData.toLowerCase().trim())
-  //   ) || mockData[0];
+  const handleDropDownClick = (cityName) => {
+    setInputData(cityName);
+  };
 
   return (
     <div className="w-screen h-screen flex relative">
@@ -43,19 +40,19 @@ export default function Home() {
           placeholder="Enter city name"
         />
 
-        {/* {inputData && (
-          <div className="flex-col items-start absolute top-[150px] left-10 z-50 bg-white px-6 py-4 rounded-3xl shadow-lg">
-            {mockData
-              .filter((data) =>
-                data.city.toLowerCase().includes(inputData.toLowerCase())
-              )
-              .map((data, index) => (
-                <div key={index} className="w-fit h-fit">
-                  <DropDownMenu cityName={data.city} />
-                </div>
-              ))}
+        {inputData && (
+          <div className="flex flex-col items-start absolute top-[150px] left-10 z-50 bg-white px-6 py-4 rounded-3xl shadow-lg">
+            {weatherData && (
+              <div className="w-fit h-fit">
+                <DropDownMenu
+                  cityName={weatherData.location.name}
+                  onClick={() => handleDropDownClick(weatherData.location.name)}
+                />
+              </div>
+            )}
           </div>
-        )} */}
+        )}
+
         <WeatherCard
           city={weatherData?.location?.name}
           dayTemp={weatherData?.forecast?.forecastday[0].day?.maxtemp_c}

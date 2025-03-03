@@ -7,7 +7,7 @@ export const WeatherCard = ({ isDaytime, city, dayTemp, dayStatus }) => {
   const formattedDate = today.toLocaleDateString("en-US", options);
   return (
     <div
-      className={`w-[414px] h-[832px] rounded-[48px] z-40 backdrop-blur-md bg-opacity-50 flex items-center pt-2 flex-col  ${
+      className={`w-max-[414px] w-fit h-max-[832px] h-fit pb-10 rounded-[48px] z-40 backdrop-blur-md bg-opacity-50 flex items-center pt-2 flex-col px-2  ${
         isDaytime ? "bg-white/50" : "bg-gray-900/50"
       }`}
     >

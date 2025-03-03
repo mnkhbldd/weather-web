@@ -22,7 +22,7 @@ export const CustomInput = ({ className, handleOnChange }) => {
       <input
         onChange={handleOnChange}
         type="text"
-        placeholder="Search"
+        placeholder="Search the city"
         className="w-[455px] h-[44px] text-black text-[32px] font-bold outline-none"
       ></input>
     </div>
