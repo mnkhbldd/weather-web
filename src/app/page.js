@@ -11,9 +11,10 @@ import { useEffect } from "react";
 
 export default function Home() {
   const circleData = ["340px", "540px", "940px", "1340px"];
+  const defaultCity = "New York";
 
   const [weatherData, setWeatherData] = useState(null);
-  const [inputData, setInputData] = useState("Ulaanbaatar");
+  const [inputData, setInputData] = useState(defaultCity);
 
   useEffect(() => {
     axios
@@ -27,6 +28,7 @@ export default function Home() {
     setInputData(event.target.value);
   };
 
+  //Changes input value once clicked
   const handleDropDownClick = (cityName) => {
     setInputData(cityName);
   };
@@ -40,13 +42,13 @@ export default function Home() {
           placeholder="Enter city name"
         />
 
-        {inputData && (
+        {inputData && inputData !== defaultCity && (
           <div className="flex flex-col items-start absolute top-[150px] left-10 z-50 bg-white px-6 py-4 rounded-3xl shadow-lg">
             {weatherData && (
               <div className="w-fit h-fit">
                 <DropDownMenu
                   cityName={weatherData.location.name}
-                  onClick={() => handleDropDownClick(weatherData.location.name)}
+                  onClick={() => handleDropDownClick(weatherData.location.name)} //Changes input value once clicked
                 />
               </div>
             )}
